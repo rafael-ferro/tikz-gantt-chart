@@ -1,0 +1,53 @@
+\documentclass[fontsize=11]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfgantt}
+\usepackage{libertine}
+\begin{document}
+
+\begin{ganttchart}[y unit title=0.4cm,
+	y unit chart=0.5cm,
+	x unit=0.5cm,
+	hgrid,
+	vgrid={*3{black,dotted}, *1{black, dashed}},
+	title label anchor/.style={below=-1.6ex},
+	title height=1,
+	bar/.append style={draw=black, thick, fill=gray!50},
+	bar incomplete/.append style={fill=white},
+	bar height=0.5,
+	progress label text={},
+	link/.append style={blue},
+	]{1}{20}
+	\gantttitle{2016}{4}
+	\gantttitle{2017}{4}
+	\gantttitle{2018}{4}
+	\gantttitle{2019}{4}
+	\gantttitle{2020}{4} \\
+
+	\ganttbar[progress=100, name=dev]   {Code development}                  {2}{7}   \\
+	\ganttbar[progress=100, name=bench] {Code benchmarking}                 {3}{7}   \\
+	\ganttbar[progress=100, name=pixe1] {Preliminary PIXE of Au}            {6}{6}   \\
+	\ganttbar[progress=66,  name=detec] {Modeling of the detection effects} {8}{11}  \\
+	\ganttbar[progress=100, name=comp1] {Comparison between models and data}{8}{9}   \\
+	\ganttbar[progress=100, name=monog] {Monograph writing}                 {9}{10}  \\
+	\ganttbar[progress=0,   name=refin] {Refinement of the models}          {11}{14} \\
+	\ganttbar[progress=33,  name=xrays] {Modeling of the X-ray lines}       {9}{12}  \\
+	\ganttbar[progress=0,   name=pixe2] {PIXE of several targets}           {12}{14} \\
+	\ganttbar[progress=0,   name=comp2] {Comparison between models and data}{14}{15} \\
+	\ganttbar[progress=0,   name=paper] {Paper writing}                     {14}{16} \\
+	\ganttbar[progress=0,   name=thesis]{Thesis writing}                    {16}{17}
+
+	\ganttlink[link mid=0.5]{dev}{comp1}
+	\ganttlink[link mid=0.33]{bench}{comp1}
+	\ganttlink{pixe1}{comp1}
+	\ganttlink[link mid=0.5]{detec}{comp1}
+	\ganttlink{comp1}{monog}
+	\ganttlink{monog}{refin}
+	\ganttlink[link mid=0.83]{refin}{comp2}
+	\ganttlink[link mid=0.5]{pixe2}{comp2}
+	\ganttlink[link mid=0.25]{xrays}{comp2}
+	\ganttlink{comp2}{thesis}
+	\ganttlink{comp2}{paper}
+
+\end{ganttchart}
+
+\end{document}
